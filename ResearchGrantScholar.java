@@ -1,4 +1,4 @@
-class ResearchGrantScholar extends Scholar implements PrintableNotice {
+class ResearchGrantScholar extends Scholar implements renewBenefit, PrintableNotice {
     private final double GWA_Req = 2.00;
     private final int Lab_Req_Hours = 40;
     private final int Max_absence = 5;
@@ -60,6 +60,22 @@ class ResearchGrantScholar extends Scholar implements PrintableNotice {
         return this.finalAllowance;
     }
 
+    @Override
+    public boolean isQualified() {
+        return checkQualification(gwa, attendanceIssues, warning_count);
+    }
+
+    @Override
+    public boolean checkQualification(double gwa, int attendanceIssues, int warning_count) {
+        return (gwa <= GWA_Req && attendanceIssues <= Max_absence && warning_count < 5);
+    }
+
+    @Override
+    public String renewDecision(boolean isQualified) {
+        return isQualified ? "RENEWED" : "NOT RENEWED";
+    }
+    
+    
     @Override
     public String noticeHeader() {
         return "*********************************\n" +

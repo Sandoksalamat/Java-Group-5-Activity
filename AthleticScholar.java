@@ -2,11 +2,14 @@ class AthleticScholar extends Scholar implements renewBenefit, PrintableNotice {
     private final double GWA_Req = 2.25;
     private final int Max_absence = 3;
     private final int Participation_Req = 5; // aka participation
-    private  int games;    
+    private int games;    
 
     public AthleticScholar(String name, String scholarID, double gwa, double serviceHoursTotal, int attendanceIssues) {
         super(name, scholarID, gwa, serviceHoursTotal, attendanceIssues);
-        this.games = games;
+    }
+
+    public void addGames(int g) {
+        this.games += g;
     }
 
     @Override
@@ -15,7 +18,6 @@ class AthleticScholar extends Scholar implements renewBenefit, PrintableNotice {
         return this.scholarType;
     }   
 
-    // Overrides evaluation rules to consider grade standing, participation issues, and attendance problems.
     @Override
     public void buildDecisionReason() {
         if (gwa > GWA_Req && attendanceIssues > Max_absence && Participation_Req < games) {
@@ -65,9 +67,13 @@ class AthleticScholar extends Scholar implements renewBenefit, PrintableNotice {
     }
 
     @Override
+    public boolean isQualified() {
+        return checkQualification(gwa, attendanceIssues, warning_count);
+    }
+
+    @Override
     public boolean checkQualification(double gwa, int attendanceIssues, int warning_count) {
-        // Logic: Return true if they meet the requirements
-        return (gwa <= GWA_Req && attendanceIssues <= Max_absence);
+        return (gwa <= GWA_Req && attendanceIssues <= Max_absence && warning_count < 5);
     }
 
     @Override
@@ -88,7 +94,6 @@ class AthleticScholar extends Scholar implements renewBenefit, PrintableNotice {
         System.out.println("Scholar: " + name);
         System.out.println("Status Level: " + currentStatus);
 
-            // Overrides notice generation so the final message can mention academic or participation deficiencies.
             if (gwa > GWA_Req && games < Participation_Req) {
                 System.out.println("Scholar has Academic and Participation deficiencies.");
             } else if (gwa > GWA_Req) {

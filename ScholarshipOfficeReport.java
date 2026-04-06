@@ -15,9 +15,15 @@ public class ScholarshipOfficeReport {
         System.out.println("Attendance Issues     : " + s.attendanceIssues);
         System.out.println("Warnings              : " + s.warning_count);
         System.out.println("Service Hours         : " + s.serviceHoursTotal);
-        System.out.println("Allowance             : " + s.finalAllowance);
+        System.out.println("Base Allowance        : " + s.baseAllowance);
+        System.out.println("Deductions            : " + s.deductions);
+        System.out.println("Final Allowance       : " + s.finalAllowance);
         System.out.println("Scholar Status        : " + s.currentStatus);
-        System.out.println("Decision              : " + s.renewalResult);
+        if (s instanceof renewBenefit rb) {
+            boolean isQualified = s.isQualified();
+            System.out.println("Decision              :" + rb.renewDecision(isQualified));
+        }
+        System.out.println("Reason                : " + s.renewalResult); 
         System.out.println("============================================================");
     }
 
@@ -32,7 +38,7 @@ public class ScholarshipOfficeReport {
         System.out.println("Semester              : " + s.semLabel);
         System.out.println("Decision              : " + s.currentStatus);
         System.out.println("Reason                : " + s.renewalResult);
-        System.out.println("Prepared By           : Scholarship Office");
+        System.out.println("Prepared By         : Scholarship Office");
         System.out.println("============================================================");
     }
 

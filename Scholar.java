@@ -30,7 +30,6 @@ abstract class Scholar {
     protected String renewalResult;
 
 
-
     public Scholar(String name, String ScholarID, double gwa, double serviceHoursTotal, int attendanceIssues) {
         this.name = name;
         this.ScholarID = ScholarID;
@@ -42,22 +41,21 @@ abstract class Scholar {
 
     //Update Methods
     public void updateWarning() {
-        System.out.println("updateWarning");
+        System.out.println("Scholar's Warning Count increased to " + warning_count);
     }
 
     public void updateAttendanceIssues() {
-        System.out.println("updateAttendanceIssues");
+        System.out.println("Scholar's Absences updated to " + attendanceIssues);
     }
 
     public void updateDisciplinaryRemark() {
-        System.out.println("updateDisciplinaryRemark");
+        System.out.println("Scholar's Disciplinary Remark: " + disciplinaryNote);
     }
 
     public void updateSemLevel() {
         System.out.println("Scholar's semester updated to: " + semLabel);
     }
 
-    //Scholar Identity + Stats
     public void scholarIdentity() {
         System.out.println("==============================================");
         System.out.println("Scholar Name               :" + this.name);
@@ -81,4 +79,8 @@ abstract class Scholar {
     abstract void evalStatus();
     abstract String getScholarCategoryName();
     abstract void buildDecisionReason();
+
+    public boolean isQualified() {
+        return false;
+    }
 }

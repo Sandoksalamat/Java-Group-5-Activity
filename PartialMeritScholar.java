@@ -62,9 +62,13 @@ class PartialMeritScholar extends Scholar implements renewBenefit, PrintableNoti
     }
 
     @Override
+    public boolean isQualified() {
+        return checkQualification(gwa, attendanceIssues, warning_count);
+    }
+
+    @Override
     public boolean checkQualification(double gwa, int attendanceIssues, int warning_count) {
-        // Logic: Return true if they meet the requirements
-        return (gwa <= GWA_Req && attendanceIssues <= Max_absence);
+        return (gwa <= GWA_Req && attendanceIssues <= Max_absence && warning_count < 5);
     }
 
     @Override
