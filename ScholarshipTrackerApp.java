@@ -23,7 +23,12 @@ public class ScholarshipTrackerApp {
             System.out.println("[10] Exit");
             System.out.print("Enter choice: ");
             
-            choice = input.nextInt();
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+            } else {
+                System.out.println("Invalid Choice.");
+                input.next();
+            }
             input.nextLine();
 
             if (choice == 1) {
@@ -37,7 +42,7 @@ public class ScholarshipTrackerApp {
                 System.out.print("Enter Year Level: ");
                 String year = input.nextLine();
                 
-                System.out.println("Select Type: [1] Full Merit  [2] Partial Merit  [3] Athletic  [4] Service Grant  [5] Emergency Assistance");
+                System.out.println("Select Type: [1] Full Merit  [2] Partial Merit  [3] Athletic  [4] Service Grant  [5] Research Grant  [6] Emergency Assistance");
                 int type = input.nextInt();
 
                 if (type == 1) {
@@ -49,6 +54,8 @@ public class ScholarshipTrackerApp {
                 } else if (type == 4) {
                     currentScholar = new ServiceGrantScholar(name, id, 0.0, 0.0, 0);
                 } else if (type == 5) {
+                    currentScholar = new ResearchGrantScholar(name, id, 0.0, 0, 0);
+                } else if (type == 6) {
                     currentScholar = new EmergencyAssistanceScholar(name, id, 0.0, 0.0, 0);
                 }
                 
@@ -77,29 +84,29 @@ public class ScholarshipTrackerApp {
                     System.out.println("Error: Register a scholar first.");
                 } else {
                     if (currentScholar instanceof AthleticScholar ath1) {
-                        System.out.println("Enter participated Games: ");
+                        System.out.print("Enter participated Games: ");
                         if (input.hasNextInt()) {
                             ath1.addGames(input.nextInt());
                             input.nextLine();
                         }
-                    if (currentScholar instanceof ResearchGrantScholar rs1) {
-                        System.out.println("Enter Lab Hours: ");
+                    } else if (currentScholar instanceof ResearchGrantScholar rs1) {
+                        System.out.print("Enter Lab Hours: ");
                         if (input.hasNextInt()) {
                             rs1.LabHrs(input.nextInt());
                             input.nextLine();
                         }
-                    }
-                    if (currentScholar instanceof EmergencyAssistanceScholar ea1) {
-                        System.out.println("Is your case approved? [true/false]");
+                    } else if (currentScholar instanceof EmergencyAssistanceScholar ea1) {
+                        System.out.print("Is your case approved? [true/false]: ");
                         ea1.setCaseApproval(input.nextBoolean());
-
-                        System.out.println("Enter support level (1-3): ");
+                        input.nextLine();
+                        System.out.print("Enter support level (1-3): ");
                         ea1.setSupportResponse(input.nextInt());
-                    }
+                        input.nextLine();
                     } else {
                         System.out.print("Enter Service Hours to add: ");
                         if (input.hasNextDouble()) {
                             currentScholar.serviceHoursTotal += input.nextDouble();
+                            input.nextLine();
                         } else {
                             System.out.println("Invalid Input");
                             input.next();
