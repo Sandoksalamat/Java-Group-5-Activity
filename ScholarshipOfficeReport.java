@@ -38,7 +38,8 @@ public class ScholarshipOfficeReport {
         System.out.println("Semester              : " + s.semLabel);
         System.out.println("Decision              : " + s.currentStatus);
         System.out.println("Reason                : " + s.renewalResult);
-        System.out.println("Prepared By         : Scholarship Office");
+        System.out.println("Required Action       : " + s.adviserNote);
+        System.out.println("Prepared By           : Scholarship Office");
         System.out.println("============================================================");
     }
 

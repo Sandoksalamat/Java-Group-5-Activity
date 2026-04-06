@@ -18,22 +18,27 @@ class FullMeritScholar extends Scholar implements renewBenefit, PrintableNotice 
         if (gwa > GWA_Req && attendanceIssues > Max_absence && serviceHoursTotal < Min_srvcHour) {
             currentStatus = "TERMINATED";
             renewalResult = "Total failure of GWA, Attendance, and Service standards.";
+            adviserNote = "Scholarship has been terminated due to failure to meet core requirements. Reapplication may be considered in the future.";
         } 
         else if (gwa > GWA_Req || attendanceIssues > Max_absence) {
             currentStatus = "PROBATIONARY";
             renewalResult = "Academic or Attendance requirement not met.";
+            adviserNote = "Student shows declining performance. Improvement in academic standing and attendance is required to maintain scholarship.";
         }
         else if (serviceHoursTotal < Min_srvcHour) {
             currentStatus = "SUSPENDED";
             renewalResult = "Service hour deficiency.";
+            adviserNote = "Student lacks the minimum hours of service.";
         } 
         else if (warning_count > 1) {
             currentStatus = "FOR REVIEW";
             renewalResult = "Disciplinary warnings exceeding limit.";
+            adviserNote = "Student has a warning count. Clean record must be maintained.";
         }
         else {
             currentStatus = "ACTIVE";
             renewalResult = "Scholarship standards maintained.";
+            adviserNote = "Student is performing well and meets all scholarship requirements. Continue current academic and service efforts.";
         }
     }
 

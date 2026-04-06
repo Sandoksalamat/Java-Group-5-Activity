@@ -7,7 +7,10 @@ class ResearchGrantScholar extends Scholar implements renewBenefit, PrintableNot
 
     public ResearchGrantScholar(String name, String scholarID, double gwa, int Lab_Req_Hours, int attendanceIssues) {
         super(name, scholarID, gwa, Lab_Req_Hours, attendanceIssues);
-        this.currentLabHrs = currentLabHrs;
+    }
+
+    public void LabHrs(int lab) {
+        this.currentLabHrs += lab;
     }
 
     @Override
@@ -21,18 +24,23 @@ class ResearchGrantScholar extends Scholar implements renewBenefit, PrintableNot
         if (gwa > GWA_Req && currentLabHrs < Lab_Req_Hours) {
             currentStatus = "TERMINATED";
             renewalResult = "GWA and Lab Hours has not met the Standard Requirement.";
+            adviserNote = "Scholarship has been terminated due to failure to meet core requirements. Reapplication may be considered in the future.";
         } else if (attendanceIssues > Max_absence) {
             currentStatus = "PROBATIONARY";
             renewalResult = "Attendance has not met the Standard Requirement.";
+            adviserNote = "Student shows declining performance. Improvement in attendance is required to maintain scholarship.";
         } else if (!isResearchApproved) {
             currentStatus = "FOR REVIEW";
             renewalResult = "Research Pending for approval.";
+            adviserNote = "Results are pending for Peer Evaluation.";
         } else if (currentLabHrs < Lab_Req_Hours) {
             currentStatus = "SUSPENDED";
             renewalResult = "Insufficient Lab/Research service hours.";
+            adviserNote = "Student shows lack of Laboratory/Research progress. Progress results are needed in order to maintain scholarship.";
         } else {
             currentStatus = "ACTIVE";
             renewalResult = "Research progress and Academic standing are satisfactory.";
+            adviserNote = "Student shows outstanding progress to Research.";
         }
     }
 

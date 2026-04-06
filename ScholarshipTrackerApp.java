@@ -82,6 +82,20 @@ public class ScholarshipTrackerApp {
                             ath1.addGames(input.nextInt());
                             input.nextLine();
                         }
+                    if (currentScholar instanceof ResearchGrantScholar rs1) {
+                        System.out.println("Enter Lab Hours: ");
+                        if (input.hasNextInt()) {
+                            rs1.LabHrs(input.nextInt());
+                            input.nextLine();
+                        }
+                    }
+                    if (currentScholar instanceof EmergencyAssistanceScholar ea1) {
+                        System.out.println("Is your case approved? [true/false]");
+                        ea1.setCaseApproval(input.nextBoolean());
+
+                        System.out.println("Enter support level (1-3): ");
+                        ea1.setSupportResponse(input.nextInt());
+                    }
                     } else {
                         System.out.print("Enter Service Hours to add: ");
                         if (input.hasNextDouble()) {

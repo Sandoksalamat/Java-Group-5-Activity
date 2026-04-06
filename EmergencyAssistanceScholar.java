@@ -1,33 +1,44 @@
 class EmergencyAssistanceScholar extends Scholar implements PrintableNotice {
-    private boolean isCaseApproved;
+    private boolean isCaseApproval;
     private int support_level; // minimal, medyo malala, max support
 
     public EmergencyAssistanceScholar(String name, String scholarID, double gwa, double serviceHoursTotal, int attendanceIssues) {
         super(name, scholarID, gwa, serviceHoursTotal, attendanceIssues);
-        this.isCaseApproved = isCaseApproved;
-        this.support_level = support_level;
+    }
+
+    public void setCaseApproval(boolean isApproved) {
+        this.isCaseApproval = isApproved;
+    }
+
+    public void setSupportResponse(int level) {
+        this.support_level = level;
     }
 
     @Override
     public String getScholarCategoryName() {
         this.scholarType = "Emergency Assistsance Scholarship";
         return this.scholarType;
-    }   
+    }
+
 
     @Override
     public void buildDecisionReason() {
-        if (!isCaseApproved) {
+        if (!isCaseApproval) {
             currentStatus = "TERMINATED";
             renewalResult = "Scholar is not in need of Emergency Assistance.";
+            adviserNote = "Emergency assistance request was not approved. Case does not meet the required criteria for support.";
         } else if (support_level == 1) {
             currentStatus = "EMERGENCY MINIMAL SUPPORT";
             renewalResult = "One-time Emergency Relief granted.";
+            adviserNote = "Student granted one-time emergency support. Situation is monitored but not critical.";
         } else if (support_level == 2) {
             currentStatus = "EMERGENCY MODERATE SUPPORT";
             renewalResult = "2-Week Emergency Relief granted.";
+            adviserNote = "Student requires short-term assistance. Follow-up evaluation recommended after support period."; 
         } else if (support_level == 3) {
             currentStatus = "EMERGENCY CONTINUOUS SUPPORT";
             renewalResult = "Continuous Emergency Support granted.";
+            adviserNote = "Student is under continuous emergency support. Close monitoring and regular reassessment are required.";
         }
     }
 
