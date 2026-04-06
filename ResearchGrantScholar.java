@@ -21,6 +21,9 @@ class ResearchGrantScholar extends Scholar implements PrintableNotice {
         if (gwa > GWA_Req && currentLabHrs < Lab_Req_Hours) {
             currentStatus = "TERMINATED";
             renewalResult = "GWA and Lab Hours has not met the Standard Requirement.";
+        } else if (attendanceIssues > Max_absence) {
+            currentStatus = "PROBATIONARY";
+            renewalResult = "Attendance has not met the Standard Requirement.";
         } else if (!isResearchApproved) {
             currentStatus = "FOR REVIEW";
             renewalResult = "Research Pending for approval.";
@@ -43,9 +46,9 @@ class ResearchGrantScholar extends Scholar implements PrintableNotice {
             this.penalties += (this.attendanceIssues * 200.00);
         }
 
-        if (this.currentStatus.equals("PROBATIONARY")) {
+        if (this.currentStatus.equals("FOR REVIEW")) {
             this.penalties += (this.baseAllowance * 0.5);
-        } else if (this.currentStatus.equals("FOR REVIEW")) {
+        } else if (this.currentStatus.equals("PROBATIONARY")) {
             this.penalties += (this.baseAllowance * 0.25);
         } else if (this.currentStatus.equals("TERMINATED") && this.currentStatus.equals("SUSPENDED")) {
             this.penalties = this.baseAllowance;
